@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class JediRepository {
 
-    private List<Jedi> jedi;
+    private final List<Jedi> jedi;
 
     public JediRepository() {
         jedi = new ArrayList<>();
