@@ -1,11 +1,10 @@
 package br.com.spring.study.springwebmvc.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,14 +18,16 @@ public class Jedi {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
-    @Size(min = 3, max = 10, message = "Nome deve conter entre 3 e 10 caracteres")
+    @Size(min = 3, max = 10, message = "Sobrenome deve conter entre 3 e 10 caracteres")
+    @NotBlank(message = "Sobrenome não pode estar em branco")
+    @NotEmpty
+    @Column(name = "last_name")
+    private String lastName;
+    @NotNull
+    @NotEmpty
     @NotBlank(message = "Nome não pode estar em branco")
     @Column(name = "name")
-    private  String lastName;
-    @NotNull
-    @NotBlank(message = "Sobrenome não pode estar em branco")
-    @Column(name = "last_name")
-    private  String name;
+    private String name;
 
     public Jedi(final String name, final String lastName) {
         this.name = name;
