@@ -1,17 +1,33 @@
 package br.com.spring.study.springwebmvc.model;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import lombok.Data;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "jedi")
+@Data
 public class Jedi {
 
-    @NotBlank
+    @Id
+    @Column(name = "id_jedi")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @NotNull
-    private  String lastName;
-
-    @NotBlank
+    @Size(min = 3, max = 10, message = "Sobrenome deve conter entre 3 e 10 caracteres")
+    @NotBlank(message = "Sobrenome não pode estar em branco")
+    @NotEmpty
+    @Column(name = "last_name")
+    private String lastName;
     @NotNull
-    private  String name;
+    @NotEmpty
+    @NotBlank(message = "Nome não pode estar em branco")
+    @Column(name = "name")
+    private String name;
 
     public Jedi(final String name, final String lastName) {
         this.name = name;
@@ -21,19 +37,4 @@ public class Jedi {
     public Jedi() {
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
 }
